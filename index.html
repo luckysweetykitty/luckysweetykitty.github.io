@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>键神之路</title>
     <style>
         * {
             margin: 0;
@@ -253,7 +253,7 @@
         <div class="frame">
             <div class="s show">
                 <div class="txtdsp  wordWrap" overflow="hidden" contenteditable="false">
-                    <span style="background-color:green ;">这是绿色</span><span>这是正常文字+levelnum</span>
+                    <span style="background-color:green ;"></span><span>+levelnum</span>
                 </div>
                 <div class="exp">
                     <div class="hit">
@@ -590,7 +590,7 @@
         levelnum = localStorage.getItem('levelnum') ? parseInt(localStorage.getItem('levelnum')) : 0;
         levelstate = localStorage.getItem('levelstate') ? (localStorage.getItem('levelstate')) : '00';
         wordlength = localStorage.getItem('wordlength') ? parseInt(localStorage.getItem('wordlength')) : 10;
-        allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : true;
+        allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : false;
         totaleng = localStorage.getItem('totaleng') ? parseInt(localStorage.getItem('totaleng')) : 0;
         totalchs = localStorage.getItem('totalchs') ? parseInt(localStorage.getItem('totalchs')) : 0;
 
