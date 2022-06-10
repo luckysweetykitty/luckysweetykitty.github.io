@@ -1,0 +1,2576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url(BingWallpaper.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-attachment: fixed;
+        }
+
+        .title {
+            width: 100%;
+            height: 58px;
+            background-color: rgb(112, 128, 158, 0.3);
+            border-bottom: 2px solid rgba(71, 70, 70, 0.5);
+
+        }
+
+        h1 {
+            text-align: center;
+            color: aliceblue;
+            line-height: 60px;
+
+        }
+
+        .foot {
+            width: 100%;
+            height: 60px;
+            background-color: rgb(112, 128, 158, 0.3);
+            ;
+
+        }
+
+        .contents {
+
+            width: 1200px;
+            height: 580px;
+            background-color: rgb(112, 128, 158, 0.3);
+
+            margin: 0 auto;
+
+
+        }
+
+        .nav {
+            height: 100%;
+            width: 160px;
+            background-color: rgb(0, 0, 255, 0.5);
+            float: left;
+
+        }
+
+        ul {
+            height: 88px;
+            widows: 100%;
+
+            list-style: none;
+            border-bottom: 1px solid rgb(27, 27, 27);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            line-height: 88px;
+            text-align: center;
+        }
+
+        .selectedL {
+            background-color: rgba(52, 16, 212, 0.5);
+        }
+
+        .unselectedL {
+            background-color: rgba(199, 236, 33, 0.3);
+        }
+
+
+
+
+        .frame {
+            background-color: rgb(255, 192, 203, .1);
+            float: left;
+            width: 760px;
+            height: 100%;
+
+
+        }
+
+        .stat {
+            background-color: rgba(0, 128, 0, .5);
+            float: right;
+            height: 100%;
+            width: 280px;
+
+
+        }
+
+        .txtdsp {
+            height: 200px;
+            width: 100%;
+            z-index: 30;
+
+        }
+
+        .txtdsp,
+        .inputText {
+            background-color: rgba(235, 29, 29, 0.0);
+
+            font-size: 30px;
+            color: black;
+            font-weight: 900;
+        }
+
+        .exp {
+            background-color: rgba(202, 202, 36, 0.5);
+            height: 380px;
+            width: 100%;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+
+
+        .hit {
+            height: 50%;
+            width: 100%;
+            background-color: rbga(0, 0, 255, 0.5);
+
+        }
+
+        .crt {
+            height: 50%;
+            width: 100%;
+            background-color: rbga(255, 0, 0, 0.5);
+        }
+
+        .anjian {
+            float: left;
+            width: 66px;
+            height: 40px;
+            margin: 3px 5px;
+            
+            line-height: 40px;
+            text-align: center;
+            font-size: 30px;
+            color: blueviolet;
+            /* 760x380 */
+
+        }
+
+        .inputText {
+
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            margin-left: -440px;
+            z-index: 999;
+            height: 200px;
+            width: 760px;
+            border: none;
+            border-collapse: separate;
+            outline: none;
+            overflow: hidden;
+            color: rgb(255, 255, 255, 0.3);
+        }
+
+        .inputText1 {
+
+            position: fixed;
+            top: 60px;
+            left: 50%;
+            margin-left: -440px;
+            z-index: 0;
+            height: 200px;
+            width: 760px;
+            border: none;
+            border-collapse: separate;
+            outline: none;
+            overflow: hidden;
+
+            background-color: rgba(255, 255, 255, 0.0);
+
+            font-size: 30px;
+            color: rgba(255, 255, 255, 0.0);
+            font-weight: 900;
+        }
+
+        .wordWrap {
+            /*这两行代码可以解决大部分场景下的换行问题*/
+            word-break: break-all;
+            word-wrap: break-word;
+            /*但在有些场景中，还需要加上下面这行代码*/
+            white-space: normal;
+        }
+    </style>
+    <script src="jquery-3.6.0.js">
+
+    </script>
+
+</head>
+
+<body>
+    <div class="title">
+        <p>
+        <h1>打字练习 </h1>
+        </p>
+    </div>
+    <div class="contents">
+        <div class="nav">
+            <ul class="" nav_tab>
+                <li class="selectedL" style="margin-top: 6px;">
+                    <h3>练气期</h3>
+                </li>
+                <li class="unselectedL">
+                    <h3>筑基期</h3>
+                </li>
+                <li class="unselectedL">
+                    <h3>结丹期</h3>
+                </li>
+                <li class="unselectedL">
+                    <h3>元婴期</h3>
+                </li>
+                <li class="unselectedL">
+                    <h3>化神期</h3>
+                </li>
+                <li class="unselectedL">
+                    <h3>大成期</h3>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="frame">
+            <div class="s show">
+                <div class="txtdsp  wordWrap" overflow="hidden" contenteditable="false">
+                    <span style="background-color:green ;">这是绿色</span><span>这是正常文字+levelnum</span>
+                </div>
+                <div class="exp">
+                    <div class="hit">
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                    </div>
+                    <div class="crt">
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            Q
+                        </div>
+                        <div class="anjian">
+                            W
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                        <div class="anjian">
+                            E
+                        </div>
+                        <div class="anjian">
+                            R
+                        </div>
+                        <div class="anjian">
+                            T
+                        </div>
+                        <div class="anjian">
+                            Y
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="s hide">
+                <div class="txtdsp">
+                    22221
+                </div>
+                <div class="exp">
+
+                </div>
+
+            </div>
+
+            <div class="s hide ">
+                <div class="txtdsp">
+                    3333
+                </div>
+                <div class="exp">
+
+                </div>
+
+            </div>
+
+            <div class="s hide">
+                <div class="txtdsp">
+                    444
+                </div>
+                <div class="exp">
+
+                </div>
+
+            </div>
+
+            <div class="s hide">
+                <div class="txtdsp">
+                    555
+                </div>
+                <div class="exp">
+
+                </div>
+
+            </div>
+            <div class="s hide">
+                <div class="txtdsp">
+                    6666
+                </div>
+                <div class="exp">
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="stat">
+
+        </div>
+
+    </div>
+
+
+    <div contenteditable="true" class="inputText" id='ipp' tabindex="0">
+    </div>
+    <div contenteditable="false" class="inputText1">
+    </div>
+    <script type="text/javascript" src="textJsonData.json">
+
+    </script>
+
+    <script>
+        dispdebug = document.querySelector('.stat');
+        var contents_l = document.querySelector('.contents');
+        var nav_l = contents_l.querySelector(".nav");
+        var nav_tab_l = nav_l.querySelector("ul");
+        var menue_list = nav_tab_l.querySelectorAll("li");
+
+        //textJsonData.json
+        wordscode = JSON.stringify(WORDSCODE) == '{}' ? '' : WORDSCODE;
+        wordcode = JSON.stringify(WORDCODE) == '{}' ? '' : WORDCODE;
+
+        //读入配置
+        //config.ini
+        //localStorage.setItem(key,value)
+        //localStorage.getItem(key)
+        //localStorage.removeItem(key)
+        //localStorage.clear()
+
+        levelnum = localStorage.getItem('levelnum') ? parseInt(localStorage.getItem('levelnum')) : 0;
+        levelstate = localStorage.getItem('levelstate') ? (localStorage.getItem('levelstate')) : '00';
+        wordlength = localStorage.getItem('wordlength') ? parseInt(localStorage.getItem('wordlength')) : 10;
+        allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : true;
+        totaleng = localStorage.getItem('totaleng') ? parseInt(localStorage.getItem('totaleng')) : 0;
+        totalchs = localStorage.getItem('totalchs') ? parseInt(localStorage.getItem('totalchs')) : 0;
+
+        //session via
+        TIMESN = 0;//均速计时
+        WCNTSN = 0;//均速字数
+        avgspd = 0;
+        function getkeyhitnum() {
+            var tmpstr = new Array();
+            tmpstr['0'] = localStorage.getItem('0') ? parseInt(localStorage.getItem('0')) : 0;
+            tmpstr['1'] = localStorage.getItem('1') ? parseInt(localStorage.getItem('1')) : 0;
+            tmpstr['2'] = localStorage.getItem('2') ? parseInt(localStorage.getItem('2')) : 0;
+            tmpstr['3'] = localStorage.getItem('3') ? parseInt(localStorage.getItem('3')) : 0;
+            tmpstr['4'] = localStorage.getItem('4') ? parseInt(localStorage.getItem('4')) : 0;
+            tmpstr['5'] = localStorage.getItem('5') ? parseInt(localStorage.getItem('5')) : 0;
+            tmpstr['6'] = localStorage.getItem('6') ? parseInt(localStorage.getItem('6')) : 0;
+            tmpstr['7'] = localStorage.getItem('7') ? parseInt(localStorage.getItem('7')) : 0;
+            tmpstr['8'] = localStorage.getItem('8') ? parseInt(localStorage.getItem('8')) : 0;
+            tmpstr['9'] = localStorage.getItem('9') ? parseInt(localStorage.getItem('9')) : 0;
+            tmpstr['a'] = localStorage.getItem('a') ? parseInt(localStorage.getItem('a')) : 0;
+            tmpstr['b'] = localStorage.getItem('b') ? parseInt(localStorage.getItem('b')) : 0;
+            tmpstr['c'] = localStorage.getItem('c') ? parseInt(localStorage.getItem('c')) : 0;
+            tmpstr['d'] = localStorage.getItem('d') ? parseInt(localStorage.getItem('d')) : 0;
+            tmpstr['e'] = localStorage.getItem('e') ? parseInt(localStorage.getItem('e')) : 0;
+            tmpstr['f'] = localStorage.getItem('f') ? parseInt(localStorage.getItem('f')) : 0;
+            tmpstr['g'] = localStorage.getItem('g') ? parseInt(localStorage.getItem('g')) : 0;
+            tmpstr['h'] = localStorage.getItem('h') ? parseInt(localStorage.getItem('h')) : 0;
+            tmpstr['i'] = localStorage.getItem('i') ? parseInt(localStorage.getItem('i')) : 0;
+            tmpstr['j'] = localStorage.getItem('j') ? parseInt(localStorage.getItem('j')) : 0;
+            tmpstr['k'] = localStorage.getItem('k') ? parseInt(localStorage.getItem('k')) : 0;
+            tmpstr['l'] = localStorage.getItem('l') ? parseInt(localStorage.getItem('l')) : 0;
+            tmpstr['m'] = localStorage.getItem('m') ? parseInt(localStorage.getItem('m')) : 0;
+            tmpstr['n'] = localStorage.getItem('n') ? parseInt(localStorage.getItem('n')) : 0;
+            tmpstr['o'] = localStorage.getItem('o') ? parseInt(localStorage.getItem('o')) : 0;
+            tmpstr['p'] = localStorage.getItem('p') ? parseInt(localStorage.getItem('p')) : 0;
+            tmpstr['q'] = localStorage.getItem('q') ? parseInt(localStorage.getItem('q')) : 0;
+            tmpstr['r'] = localStorage.getItem('r') ? parseInt(localStorage.getItem('r')) : 0;
+            tmpstr['s'] = localStorage.getItem('s') ? parseInt(localStorage.getItem('s')) : 0;
+            tmpstr['t'] = localStorage.getItem('t') ? parseInt(localStorage.getItem('t')) : 0;
+            tmpstr['u'] = localStorage.getItem('u') ? parseInt(localStorage.getItem('u')) : 0;
+            tmpstr['v'] = localStorage.getItem('v') ? parseInt(localStorage.getItem('v')) : 0;
+            tmpstr['w'] = localStorage.getItem('w') ? parseInt(localStorage.getItem('w')) : 0;
+            tmpstr['x'] = localStorage.getItem('x') ? parseInt(localStorage.getItem('x')) : 0;
+            tmpstr['y'] = localStorage.getItem('y') ? parseInt(localStorage.getItem('y')) : 0;
+            tmpstr['z'] = localStorage.getItem('z') ? parseInt(localStorage.getItem('z')) : 0;
+            tmpstr[';'] = localStorage.getItem(';') ? parseInt(localStorage.getItem(';')) : 0;
+            tmpstr[','] = localStorage.getItem(',') ? parseInt(localStorage.getItem(',')) : 0;
+            tmpstr['.'] = localStorage.getItem('.') ? parseInt(localStorage.getItem('.')) : 0;
+            tmpstr['/'] = localStorage.getItem('/') ? parseInt(localStorage.getItem('/')) : 0;
+
+            //  console.log('tmpstr');
+            return tmpstr;
+
+
+        };
+        keyhitnum = getkeyhitnum();
+
+
+        function getkeyerrnum() {
+            var tmpstr = new Array();
+            tmpstr['0'] = localStorage.getItem('0e') ? parseInt(localStorage.getItem('0e')) : 0;
+            tmpstr['1'] = localStorage.getItem('1e') ? parseInt(localStorage.getItem('1e')) : 0;
+            tmpstr['2'] = localStorage.getItem('2e') ? parseInt(localStorage.getItem('2e')) : 0;
+            tmpstr['3'] = localStorage.getItem('3e') ? parseInt(localStorage.getItem('3e')) : 0;
+            tmpstr['4'] = localStorage.getItem('4e') ? parseInt(localStorage.getItem('4e')) : 0;
+            tmpstr['5'] = localStorage.getItem('5e') ? parseInt(localStorage.getItem('5e')) : 0;
+            tmpstr['6'] = localStorage.getItem('6e') ? parseInt(localStorage.getItem('6e')) : 0;
+            tmpstr['7'] = localStorage.getItem('7e') ? parseInt(localStorage.getItem('7e')) : 0;
+            tmpstr['8'] = localStorage.getItem('8e') ? parseInt(localStorage.getItem('8e')) : 0;
+            tmpstr['9'] = localStorage.getItem('9e') ? parseInt(localStorage.getItem('9e')) : 0;
+            tmpstr['a'] = localStorage.getItem('ae') ? parseInt(localStorage.getItem('ae')) : 0;
+            tmpstr['b'] = localStorage.getItem('be') ? parseInt(localStorage.getItem('be')) : 0;
+            tmpstr['c'] = localStorage.getItem('ce') ? parseInt(localStorage.getItem('ce')) : 0;
+            tmpstr['d'] = localStorage.getItem('de') ? parseInt(localStorage.getItem('de')) : 0;
+            tmpstr['e'] = localStorage.getItem('ee') ? parseInt(localStorage.getItem('ee')) : 0;
+            tmpstr['f'] = localStorage.getItem('fe') ? parseInt(localStorage.getItem('fe')) : 0;
+            tmpstr['g'] = localStorage.getItem('ge') ? parseInt(localStorage.getItem('ge')) : 0;
+            tmpstr['h'] = localStorage.getItem('he') ? parseInt(localStorage.getItem('he')) : 0;
+            tmpstr['i'] = localStorage.getItem('ie') ? parseInt(localStorage.getItem('ie')) : 0;
+            tmpstr['j'] = localStorage.getItem('je') ? parseInt(localStorage.getItem('je')) : 0;
+            tmpstr['k'] = localStorage.getItem('ke') ? parseInt(localStorage.getItem('ke')) : 0;
+            tmpstr['l'] = localStorage.getItem('le') ? parseInt(localStorage.getItem('le')) : 0;
+            tmpstr['m'] = localStorage.getItem('me') ? parseInt(localStorage.getItem('me')) : 0;
+            tmpstr['n'] = localStorage.getItem('ne') ? parseInt(localStorage.getItem('ne')) : 0;
+            tmpstr['o'] = localStorage.getItem('oe') ? parseInt(localStorage.getItem('oe')) : 0;
+            tmpstr['p'] = localStorage.getItem('pe') ? parseInt(localStorage.getItem('pe')) : 0;
+            tmpstr['q'] = localStorage.getItem('qe') ? parseInt(localStorage.getItem('qe')) : 0;
+            tmpstr['r'] = localStorage.getItem('re') ? parseInt(localStorage.getItem('re')) : 0;
+            tmpstr['s'] = localStorage.getItem('se') ? parseInt(localStorage.getItem('se')) : 0;
+            tmpstr['t'] = localStorage.getItem('te') ? parseInt(localStorage.getItem('te')) : 0;
+            tmpstr['u'] = localStorage.getItem('ue') ? parseInt(localStorage.getItem('ue')) : 0;
+            tmpstr['v'] = localStorage.getItem('ve') ? parseInt(localStorage.getItem('ve')) : 0;
+            tmpstr['w'] = localStorage.getItem('we') ? parseInt(localStorage.getItem('we')) : 0;
+            tmpstr['x'] = localStorage.getItem('xe') ? parseInt(localStorage.getItem('xe')) : 0;
+            tmpstr['y'] = localStorage.getItem('ye') ? parseInt(localStorage.getItem('ye')) : 0;
+            tmpstr['z'] = localStorage.getItem('ze') ? parseInt(localStorage.getItem('ze')) : 0;
+            tmpstr[';'] = localStorage.getItem(';e') ? parseInt(localStorage.getItem(';e')) : 0;
+            tmpstr[','] = localStorage.getItem(',e') ? parseInt(localStorage.getItem(',e')) : 0;
+            tmpstr['.'] = localStorage.getItem('.e') ? parseInt(localStorage.getItem('.e')) : 0;
+            tmpstr['/'] = localStorage.getItem('/e') ? parseInt(localStorage.getItem('/e')) : 0;
+
+            //	 console.log(  tmpstr);
+            return tmpstr;
+        }
+
+        keyerrnum = getkeyerrnum();
+
+        //定义中文数组	
+        //       wordscode=JSON.stringify(WORDSCODE) == '{}'?'':WORDSCODE;  
+        // wordcode=JSON.stringify(WORDCODE) == '{}'?'':WORDCODE;     rnum
+        //Object.keys(wordcode).length
+        wordnum = new Array();
+        for (var i in wordcode) {
+
+            wordnum[i] = localStorage.getItem('total' + i) ? parseInt(localStorage.getItem('total' + i)) : 0;
+
+        }
+        worderr = new Array();
+        for (var i in wordcode) {
+
+            worderr[i] = localStorage.getItem('error' + i) ? parseInt(localStorage.getItem('error' + i)) : 0;
+
+        }
+
+        wordspd = new Array();
+        for (var i in wordcode) {
+
+            wordspd[i] = localStorage.getItem('spd' + i) ? parseInt(localStorage.getItem('spd' + i)) : 0;
+
+        }
+
+
+        //字典排序程序
+        function getwordtoperr(dict) {
+            var res2 = Object.keys(dict).sort(function (a, b) { return dict[a] - dict[b]; });
+            return res2;
+        }
+
+
+
+        //    console.log("输出最初的字典元素: ");                                                                       
+        //    for(var key in dic){                                                                                       
+        //        console.log("key: " + key + " ,value: " + dic[key]);                                                   
+        //    }                                                                                                          
+        //                                                                                                               
+        //    console.log("字典元素按key值排序: ");                                                                      
+        //    var res = Object.keys(dic).sort();                                                                         
+        //    for(var key in res){                                                                                       
+        //        console.log("key: " + res[key] + " ,value: " + dic[res[key]]);                                         
+        //    }                                                                                                          
+        //                                                                                                               
+        //    console.log("字典元素按value值排序: ");                                                                    
+        //    var res2 = Object.keys(dic).sort(function(a,b){ return dic[a]-dic[b]; });                                  
+        //    for(var key in res2){                                                                                      
+        //        console.log("key: " + res2[key] + " ,value: " + dic[res2[key]]);                                       
+        //    }                                                              
+
+
+
+
+
+
+
+        function readFile(filename) {
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var f = fso.OpenTextFile(filename, 1);
+            var s = "";
+            var i = 0;
+            while (!f.AtEndOfStream)
+                //s += f.ReadLine()+"/n"; 
+                s[i++] = f.ReadLine();
+            f.Close();
+            return s;
+        }
+
+        //写文件 
+        function writeFile(filename, filecontent) {
+            var fso, f, s;
+            fso = new ActiveXObject("Scripting.FileSystemObject");
+            f = fso.OpenTextFile(filename, 8, true);
+            f.WriteLine(filecontent);
+            f.Close();
+            alert('write ok');
+        }
+
+
+        function fileio() {
+            var fso;
+            try {
+                fso = new ActiveXObject("Scripting.FileSystemObject");
+            } catch (e) {
+                alert("当前浏览器不支持");
+                // return;
+            }
+
+            alert("方法已执行2");
+            //    var f1 = fso.createtextfile("config.ini",true);
+            //    f1.write("这是一个文本文档");  
+            var openf1 = fso.OpenTextFile("config.ini");
+            str = openf1.ReadLine();
+            alert("里面的内容为'" + str + "'");
+        }
+
+
+
+
+
+        //读入config.ini
+
+
+        //  console.log(wordcode);
+
+
+        //   var tmpstr=readFile(config.ini)
+        //    levelnum=tmpstr[0];
+        //   levelstate=tmpstr[1];
+        //   wordlength=tmpstr[2]
+        //     allowskiplevel=tmpstr[3]?true:false;
+
+
+
+
+        newlevelnum = 0;
+        levelflag = false;
+
+        var frame_l = document.querySelector(".frame");
+        var frame_list = frame_l.querySelectorAll(".s");
+        for (var i = 0; i < menue_list.length; i++) {
+
+            menue_list[i].setAttribute('index', i);
+            menue_list[i].onclick = function () {
+                //console.log( parseInt(this.getAttribute('index'))<levelnum);
+                if (allowskiplevel || (parseInt(this.getAttribute('index')) <= levelnum)) {
+                    for (var i = 0; i < menue_list.length; i++) {
+                        menue_list[i].className = "unselectedL";
+                        // console.log(i); 
+                        this.className = "selectedL";
+                    }
+                    for (var j = 0; j < menue_list.length; j++) {
+                        frame_list[j].className = 'hide';
+                    }
+
+                    // frame_list[this.getAttribute('index')].className = 'show';
+                    frame_list[0].className = 'show';
+                    newlevelnum = this.getAttribute('index');
+                    levelflag = true;
+                    setLevel(newlevelnum);
+                    // if (parseInt(this.getAttribute('index') < levelnum))
+                    //     console.log('kkkk');
+                }
+            }
+        }
+
+
+
+        function setLevel(levelnum) {
+            //s.innerText="-——————————”+’levelnum‘；
+            //t = frame_list[levelnum].querySelector('.txtdsp');
+            t = frame_list[0].querySelector('.txtdsp');
+            //console.log(levelnum);
+            levelstate = '00';
+
+            //  t.innerHTML = "装大大大大活活展展并大当渐控下控是";
+            s.innerHTML = '';
+
+            old = "";
+            addstr = "";
+            WCNTSN = 0;
+            CHSCNT = 18;
+            TIMESN = 0;
+            STARTTIME = 0;
+            avgspd = 0;
+            STARTFLAG = false;
+            WDCNT = 0;
+            t.innerHTML = getStr(levelnum, levelstate, wordlength);
+            //console.log(levelnum);
+            totalengwg =0;
+            accuraty=0;
+
+        }
+
+
+
+
+        //复制过来开始
+        t = frame_list[0].querySelector('.txtdsp');
+
+        //   s=document.querySelector('.input');
+        //  r=document.querySelector('form');
+        //   rr=r.querySelector('textarea');
+        s = document.querySelector('.inputText');
+
+
+        divexp = frame_list[0].querySelector('.exp');
+        divhit = divexp.querySelector('.hit');
+        divcrt = divexp.querySelector('.crt');
+        anjianhit = divhit.querySelectorAll('.anjian');
+        anjiancrt = divcrt.querySelectorAll('.anjian');
+
+        //anjiancrt[0].innerText="QQ";
+
+
+
+        var keybrd = { 'k00': 'q', 'k01': 'w', 'k02': 'e', 'k03': 'r', 'k04': 't', 'k05': 'y', 'k06': 'u', 'k07': 'i', 'k08': 'o', 'k09': 'p', 'k10': 'a', 'k11': 's', 'k12': 'd', 'k13': 'f', 'k14': 'g', 'k15': 'h', 'k16': 'j', 'k17': 'k', 'k18': 'l', 'k19': ';', 'k20': 'z', 'k21': 'x', 'k22': 'c', 'k23': 'v', 'k24': 'b', 'k25': 'n', 'k26': 'm', 'k27': ',', 'k28': '.', 'k29': '/' };
+        WDCNT = 0;
+        CHSCNT = 18;
+        CIkey = Object.keys(WORDSCODE);
+        function getStr(levelnum, stage, num = 10, flag_next = false) {
+            var str = '';
+            if (parseInt(levelnum) == 0) {
+                switch (stage) {
+                    //异手同行
+                    case '00':
+
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0)
+                                tmp = getRnd(0, 4);
+                            else
+                                tmp = getRnd(5, 9);
+
+                            str += keybrd['k0' + tmp];
+                            //
+                            //str+='n';
+                        }
+                        break;
+                    case '01':
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '02':
+
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+                    case '03':
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '04':
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '05':
+
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+                    case '06':
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '07':
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '08':
+
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+                            if (i % 2 == 0) {
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    //异手错单行
+                    case '10':
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '11':
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+                    case '12':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '13':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+
+                    //异手错两行
+                    case '20':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+
+
+                    //同手同行
+
+
+                    case '30':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+                    case '31':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+                    case '32':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '33':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '34':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '35':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '36':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '37':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '38':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+
+                    //同手错单行
+                    case '40':
+
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '41':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '42':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+                    case '43':
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k1' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+
+                    //同手错两行
+                    case '50':
+
+
+
+                        num = num / 2;
+                        for (var i = 0; i < parseInt(num); i++) {
+                            // str+='m';
+                            var tmp = '';
+
+                            if (i % 2 == 0) {
+
+
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(0, 4);
+                                str += keybrd['k2' + tmp];
+                            }
+                            else {
+
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k0' + tmp];
+                                tmp = getRnd(5, 9);
+                                str += keybrd['k2' + tmp];
+                            }
+
+
+                            //
+                            //str+='n';
+                        }
+                        break;
+
+
+
+
+                }
+
+                return str;
+            }
+
+            if (parseInt(levelnum) == 1) {
+
+
+                if (!flag_next) {
+                    var startlevel1 = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage)));
+                    //console.log(startlevel1);
+                    var startindex = startlevel1 + (WDCNT) * num;
+                    // console.log(startindex);
+                    var endindex = startindex + num;
+                    // console.log(endindex);
+                    // console.log(endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1));
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                        //  console.log(startindex);
+                        //  console.log(endindex);
+                    }
+                    str = TWOCODE.slice(startindex, endindex);
+                    // console.log("重打"+endindex+'/'+startindex);
+                    return str;
+                }
+                else {
+                    var startlevel1 = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT + 1) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = TWOCODE.slice(startindex, endindex);
+                    // console.log("顺打"+endindex+'/'+startindex);
+                    WDCNT++;
+                    return str;
+
+                }
+
+
+            }
+
+            if (parseInt(levelnum) == 2) {
+
+
+                if (!flag_next) {
+                    var startlevel1 = Math.floor(THREETOP1500.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = THREETOP1500.slice(startindex, endindex);
+
+                    return str;
+                }
+                else {
+                    var startlevel1 = Math.floor(THREETOP1500.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT + 1) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = THREETOP1500.slice(startindex, endindex);
+                    WDCNT++;
+                    return str;
+
+                }
+
+
+            }
+
+            if (parseInt(levelnum) == 3) {
+
+                if (!flag_next) {
+                    var startlevel1 = Math.floor(THREETOP3000.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = THREETOP3000.slice(startindex, endindex);
+
+                    return str;
+                }
+                else {
+                    var startlevel1 = Math.floor(THREETOP3000.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT + 1) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = THREETOP3000.slice(startindex, endindex);
+                    WDCNT++;
+                    return str;
+
+                }
+
+
+
+
+
+
+            }
+            if (parseInt(levelnum) == 4) {
+
+
+
+
+                if (!flag_next) {
+                    var startlevel1 = Math.floor(LAST3000.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = LAST3000.slice(startindex, endindex);
+
+                    return str;
+                }
+                else {
+                    var startlevel1 = Math.floor(LAST3000.length / CHSCNT * (parseInt(stage)));
+                    var startindex = startlevel1 + (WDCNT + 1) * num;
+                    var endindex = startindex + num;
+                    if (endindex >= TWOCODE.length / CHSCNT * (parseInt(stage) + 1)) {
+                        startindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1 - num);
+                        endindex = Math.floor(TWOCODE.length / CHSCNT * (parseInt(stage) + 1) - 1);
+                    }
+                    str = LAST3000.slice(startindex, endindex);
+                    WDCNT++;
+                    return str;
+
+                }
+
+
+
+            }
+
+            if (parseInt(levelnum) == 5) {
+                //var i=CIkey.length;
+                for (var i = 0; i < num; i++) {
+                    if (i % 2)
+                        str += "<span style='background-color:blue'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
+                    else
+                        str += "<span style='background-color:red'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
+                }
+                return str;
+            }
+        }
+
+        function getRnd(min, max) {
+            // max - 期望的最大值 
+            // min - 期望的最小值         
+            // parseInt(Math.random()*(max-min+1)+min,10); 
+            // return '0';
+            var tmp = Math.floor(Math.random() * (max - min + 1) + min);
+            // tmp="0";
+            return tmp;
+        }
+
+
+        s.onclick = function () {
+            STARTTIME = +new Date;
+            //dispdebug.innerText = STARTTIME;
+            STARTFLAG = true;
+
+        }
+        s.onblur = function () {
+            //  STSTARTTIME=+new Date;
+
+            STARTFLAG = false;
+            var tg = +new Date;
+            TIMESN = tg - STARTTIME + TIMESN;
+          //  dispdebug.innerText = TIMESN;
+            //alert(":");
+            savedata();
+        }
+
+
+        //  s.innerHTML="<span style='background-color:pink'>876</span>";
+        // rr.innerHTML="<span style='background-color:blue'>876</span>";
+        //s.on('DOMNodeInserted',function(){
+        // s.innerHTML="888888";
+        // });
+        //s.innerHTML="888888";
+        //事件冒泡 
+        //DOMNodeInserted
+        // $("#ipp").on('change', function(e) {
+        //s=document.querySelector('.input');
+        //s.innerHTML="888888";
+        //console.log("kkk");
+        //});
+
+        //s.innerHTML="<span style='background-color:pink'>uejejj</span>";
+
+
+
+
+
+
+
+        levelinit();
+        function levelinit() {
+            //  getStr(levelnum, stage, num = 10, flag_next = false)
+            str = getStr(levelnum, levelstate, wordlength);
+            //  str='活今道道没没渐渐美道道渐具差没水那么道但是';
+            t.innerHTML = str;
+            
+            //    levelnum = localStorage.getItem('levelnum') ? parseInt(localStorage.getItem('levelnum')) : 0;
+            // levelstate = localStorage.getItem('levelstate') ? (localStorage.getItem('levelstate')) : '00';
+            // wordlength = localStorage.getItem('wordlength') ? parseInt(localStorage.getItem('wordlength')) : 32;
+            // allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : true;
+            // totaleng = localStorage.getItem('totaleng') ? parseInt(localStorage.getItem('totaleng')) : 0;
+            // totalchs = localStorage.getItem('totalchs') ? parseInt(localStorage.getItem('totalchs')) : 0;
+totalengwg =0;
+ accuraty=0;
+ TIMESN=1;//均速计时
+ WCNTSN=0;//均速字数
+
+        }
+
+
+function updateclr()
+{
+            s.innerHTML = '';
+
+            old = "";
+            addstr = "";
+            WCNTSN = 0;
+            CHSCNT = 18;
+            TIMESN = 0;
+            STARTTIME = 0;
+            avgspd = 0;
+            STARTFLAG = false;
+            WDCNT = 0;
+            t.innerHTML = getStr(levelnum, levelstate, wordlength);
+            //console.log(levelnum);
+            totalengwg =0;
+            accuraty=0;
+}
+
+				targetspeed=[300,200,150,100,100,100];
+        doing = false;
+
+
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+
+
+        mainArea = document.querySelector(".inputText");//#ipp
+
+        //MutationObserver = window.MutationObserver;
+        old = "";
+				totalengwg =0;
+        DocumentObserver = new MutationObserver(function () {
+
+
+            if ((levelflag) && (parseInt(newlevelnum) == 0) || (!levelflag) && (parseInt(levelnum) == 0)) {
+                //BALABALABALA
+                //s=document.querySelector('.ipp');
+                //t=document.querySelector('.disp');
+                //   s.innerHTML+="<span style='background-color:blue'>876</span>";
+
+                // console.log(levelstate);
+                //   var newstr=s.innerText;
+                // if(newstr.length>old.length) ;
+                //     var strd=newstr.slice( old.length,newstr.length-1);
+
+                //    old=s.innerText;
+
+                //    r=document.querySelector('form');
+                // rr=r.querySelector('textarea');
+                //  rr.value=strd;
+
+                var stxt = s.innerText;//输入
+                var ttxt = t.innerText;//目标文本
+                //doing=true;
+                if (stxt.length > ttxt.length && !doing) {
+                    stxt = stxt.slice(0, ttxt.length);
+                    s.innerHTML = stxt;
+                    setCaretPosition(s, stxt.length);
+
+                }
+
+                //eng 英文模式
+
+                var addstr = "";
+
+                
+                var newstr = s.innerText;
+                if (newstr.length > old.length) {
+                    addstr = newstr.slice(old.length, newstr.length);
+                    totaleng += 1;
+                    WCNTSN += 1;
+                    
+                }
+                if (newstr.length < old.length) {
+                    //addstr=old.slice(newstr.length,old.length);
+                    totaleng -= 1;
+                    WCNTSN -= 1;
+//                    console.log( newstr);
+//                    console.log(old);
+                    
+                }
+
+                var strcrt = ttxt[newstr.length - 1];
+                if (addstr != strcrt)
+                {
+                    keyerrnum[strcrt] += 1;
+                    totalengwg ++;
+                    console.log(addstr);
+                    console.log(strcrt);
+                }
+
+                keyhitnum[addstr] += 1;
+
+
+                var datad = +new Date();
+                TIMESN = TIMESN + datad - STARTTIME;
+                STARTTIME = datad;
+                accuraty=(1-totalengwg/WCNTSN );
+//                console.log(totalengwg);
+//                       console.log(WCNTSN);
+               // avgspd = WCNTSN / (TIMESN / 60000);
+                avgspd = Math.floor(WCNTSN / (TIMESN / 60000));
+                //dispdebug.innerText = "eng" + " words:" + totaleng + addstr + strcrt + strcrt + "x" + keyerrnum[strcrt] + addstr + ":" + keyhitnum[addstr] + "  TIMESN:" + TIMESN + "WCNTSN:" + WCNTSN + "@" + avgspd + "@" + (levelnum);
+                dispdebug.innerHTML = "<h5>"+"英文字数："+totaleng+"</h5>" + "<br>"+"<h5>"+"中文字数："+totalchs+"</h5>" + "<br>"+"<h5>"+"平均速度："+avgspd+"</h5>"+"<br>"+"<h5>"+"准确率："+accuraty+"</h5>";
+                old = newstr;
+                //TIMESN=0;//均速计时
+                //WCNTSN=0;//均速字数
+											checkColor();
+
+            }
+        });
+
+        //监听输入开始
+        s.addEventListener('compositionstart', function (e) {
+            doing = true;
+            //dispdebug.innerText="doing";
+            //      rr.value=doing+"：：";
+            //    s.style.background="blue";
+        }, false);
+
+        //监听输入结束
+        s.addEventListener('compositionend', function (e) {
+            if (!((levelflag) && (parseInt(newlevelnum) == 0) || (!levelflag) && (parseInt(levelnum) == 0))) {
+                var datad = +new Date();
+                TIMESN = TIMESN + datad - STARTTIME;
+                var SINGLEWORDTIME = datad - STARTTIME;
+                STARTTIME = datad;
+                doing = false;
+                //       rr.value=doing+"…………";
+                // doSomething();
+                console.log(levelstate);
+              //  dispdebug.innerText = "no";
+                var stxt = s.innerText;//输入
+                var ttxt = t.innerText;//目标文本
+
+                if (stxt.length >= ttxt.length) {
+                    stxt = stxt.slice(0, ttxt.length);
+                    s.innerHTML = stxt;
+                    //    s.style.background="red";
+                    setCaretPosition(s, stxt.length);
+                    //   checkColor();
+
+                }
+                
+
+                var strcrt = "";
+                var addstr = "";
+                var newstr = s.innerText;
+                if (newstr.length > old.length) {
+                    addstr = newstr.slice(old.length, newstr.length);
+                    totalchs += addstr.length;
+                    WCNTSN += addstr.length;
+                    strcrt = ttxt.slice(old.length, newstr.length);
+                    //keyerrnum[strcrt]+=1;
+                    //keyhitnum[addstr]+=1;
+                    strtest = "";
+                    for (var i = 0; i < strcrt.length; i++) {
+                        if (wordcode[addstr[i]] != "" && wordcode[addstr[i]] != undefined) {
+                            wordnum[addstr[i]] += 1;
+                            strtest += "单字计数" + addstr[i] + ":" + wordnum[addstr[i]];
+                        }
+                        if (strcrt[i] != addstr[i]) {
+                        	    totalengwg ++;
+                            if (wordcode[strcrt[i]] != "" && wordcode[strcrt[i]] != undefined) {
+                                worderr[strcrt[i]] += 1;
+                                strtest += "错字计数" + strcrt[i] + "!:" + worderr[strcrt[i]];
+                            }
+                        }
+                        else {
+                            if (wordcode[strcrt[i]] != "" && wordcode[strcrt[i]] != undefined) {
+                                wordspd[strcrt[i]] = wordspd[strcrt[i]] * 0.99 + (SINGLEWORDTIME / strcrt.length) * .01;
+                                strtest += "单字速度" + strcrt[i] + ":" + wordspd[strcrt[i]] + "mspw";
+                            }
+                        }
+                    }
+
+                }
+                else if (newstr.length < old.length) {
+                    //addstr=old.slice(newstr.length,old.length);
+
+                    //totalchs-=1;
+                    //WCNTSN-=1;
+                }
+
+
+                if (addstr != strcrt) {
+                    ;
+
+
+                    //
+                }
+
+
+
+//console.log(totalengwg);
+//console.log(WCNTSN);
+								accuraty=(1-totalengwg/WCNTSN );
+                avgspd = Math.floor(WCNTSN / (TIMESN / 60000));
+                //dispdebug.innerText="eng"+" words:"+totalchs+addstr+strcrt+strcrt+"x"+keyerrnum[strcrt]+addstr+":"+keyhitnum[addstr]+"  TIMESN:"+TIMESN+"WCNTSN:"+WCNTSN+"@"+avgspd+"@"+(levelnum);
+
+                //TIMESN=0;//均速计时
+                //WCNTSN=0;//均速字数
+                old = newstr;
+								checkColor();
+                dispdebug.innerHTML = "<h5>"+"英文字数："+totaleng+"</h5>" + "<br>"+"<h5>"+"中文字数："+totalchs+"</h5>" + "<br>"+"<h5>"+"平均速度："+avgspd+"</h5>"+ "<br>"+"<h5>"+"准确率："+accuraty+"</h5>";
+
+
+            }
+        }, false);
+
+        function checkColor() {
+
+            var input_txt = s.innerText;
+            var right_txt = t.innerText;
+            var formatted = '';
+            var currentR = false;
+            if (input_txt[0] == right_txt[0]) {
+                formatted = "<span style='background-color:gray'>";
+                currentR = true;
+            }
+            else {
+
+                formatted = "<span style='background-color:red'>";
+                currentR = false;
+            }
+
+
+
+
+            for (var i = 0; i < right_txt.length && i < input_txt.length; i++) {
+                //        rr.value=input_txt[i]+right_txt[i]+'   '+i+'   '+right_txt.length+'    '+input_txt.length;
+                var charR = (input_txt[i] == right_txt[i]) ? true : false;
+                if (currentR == charR) {
+                    formatted = formatted + right_txt[i];
+                }
+                else {
+                    if (currentR) {
+
+                        currentR = !currentR;
+                        formatted = formatted + "</span><span style='background-color:red'>" + right_txt[i];
+
+                    } else {
+
+                        currentR = !currentR;
+                        formatted = formatted + "</span><span style='background-color:gray'>" + right_txt[i];
+                    }
+
+
+                }
+
+
+
+            }
+
+
+            formatted = formatted + "</span>";
+            
+            if (right_txt.length > input_txt.length)
+                formatted = formatted + "<span style='background-color:rgb(0,0,0,0)'>" + right_txt.slice(input_txt.length, right_txt.length) + "</span>";
+
+
+            t.innerHTML = formatted;
+
+            if (right_txt.length <= input_txt.length && right_txt[right_txt.length - 1] == input_txt[right_txt.length - 1]) {
+
+
+
+                callNext();
+                callDisplay();
+            }
+
+        }
+        
+        flag_next = false;
+        function callNext() {
+            // t.innerHTML = getStr(levelstate, wordlength);
+            s.innerHTML = '';
+            old = "";
+            // checkColor()
+            var s111 = document.querySelector('.inputText1');
+            s111.innerHTML = "";
+            
+            //  getStr(levelnum, stage, num = 10, flag_next = false)
+            if (parseInt(levelnum) == 0) {
+
+                if (avgspd >= targetspeed[parseInt(levelnum)]&&accuraty>0.95) {
+
+                    var level1 = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '10', '11', '12', '13', '20', '30', '31', '32', '33', '34', '35', '36', '37', '38', '40', '41', '42', '43', '50'];
+                    if (level1.indexOf(levelstate) < level1.length - 1) {
+
+                        levelstate = level1[level1.indexOf(levelstate) + 1];
+                        
+                        
+                        
+                        updateclr();
+                        savedata();
+                    }
+                    else {
+                        levelnum = parseInt(levelnum) + 1;
+                        savedata();
+                        levelstate = '00';
+                        // savedata();
+                        updateclr();
+                        updatelevel(levelnum);
+                        t.innerHTML = getStr(levelnum, levelstate, wordlength);
+                        return;
+
+                    }
+
+
+                    //     levelnum = localStorage.getItem('levelnum') ? parseInt(localStorage.getItem('levelnum')) : 0;
+                    // levelstate = localStorage.getItem('levelstate') ? (localStorage.getItem('levelstate')) : '00';
+                    // wordlength = localStorage.getItem('wordlength') ? parseInt(localStorage.getItem('wordlength')) : 32;
+                    // allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : true;
+                    // totaleng = localStorage.getItem('totaleng') ? parseInt(localStorage.getItem('totaleng')) : 0;
+                    // totalchs = localStorage.getItem('totalchs') ? parseInt(localStorage.getItem('totalchs')) : 0;
+
+
+                    //00-08 10-13 20 30-38 40-43 50
+
+                    //  savedata();
+                    t.innerHTML = getStr(levelnum, levelstate, wordlength);
+                    return;
+
+                }
+                else {
+
+                    t.innerHTML = getStr(levelnum, levelstate, wordlength);
+                    return;
+                }
+
+            }
+            if (parseInt(levelnum) == 1 || parseInt(levelnum) == 2 || parseInt(levelnum) == 3 || parseInt(levelnum) == 4) {
+
+                if (avgspd >= targetspeed[parseInt(levelnum)]&&accuraty>0.95) {
+
+
+                    //console.log(levelnum+"eeee"+levelstate);
+                    //if((parseInt(levelstate)+1)*DICTLEN/CHSCNT)
+                    var level1 = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27'];
+                    //DICTLEN=0;
+
+                    switch (parseInt(levelnum)) {
+
+                        case 1: DICTLEN = TWOCODE.length; break;
+                        case 2: DICTLEN = THREETOP1500.length; break;
+                        case 3: DICTLEN = THREETOP3000.length; break;
+                        case 4: DICTLEN = LAST3000.length; break;
+
+
+
+                    }
+                    if (WDCNT * wordlength >= DICTLEN / CHSCNT) {
+
+                        levelstate = level1[level1.indexOf(levelstate) + 1];
+                        if (parseInt(levelstate) >= CHSCNT) {
+                            levelnum += 1;
+                            levelstate = '00';
+                            savedata();
+                            
+
+                        }
+												updateclr();	
+                        WDCNT = 0;
+                        // savedata();
+                        flag_next = false;
+                        savedata();
+
+                    }
+                    else {
+                        //levelnum = parseInt(levelnum) + 1;
+                        //levelstate = '00';
+                        flag_next = true;
+
+                    }
+
+
+                    //     levelnum = localStorage.getItem('levelnum') ? parseInt(localStorage.getItem('levelnum')) : 0;
+                    // levelstate = localStorage.getItem('levelstate') ? (localStorage.getItem('levelstate')) : '00';
+                    // wordlength = localStorage.getItem('wordlength') ? parseInt(localStorage.getItem('wordlength')) : 32;
+                    // allowskiplevel = localStorage.getItem('allowskiplevel') ? parseInt(localStorage.getItem('allowskiplevel')) : true;
+                    // totaleng = localStorage.getItem('totaleng') ? parseInt(localStorage.getItem('totaleng')) : 0;
+                    // totalchs = localStorage.getItem('totalchs') ? parseInt(localStorage.getItem('totalchs')) : 0;
+
+
+                    //00-08 10-13 20 30-38 40-43 50
+
+
+                    t.innerHTML = getStr(levelnum, levelstate, wordlength, flag_next);
+                    return;
+
+                }
+                else {
+
+                    flag_next = false;
+                    t.innerHTML = getStr(levelnum, levelstate, wordlength, flag_next);
+                    return;
+                }
+
+
+
+            }
+
+
+
+
+            if (parseInt(levelnum) == 5) {
+                // t.innerHTML = getStr(levelnum, levelstate, wordlength);
+                var s111 = document.querySelector('.inputText1');
+                // s111.innerHTML = getStr(levelnum, levelstate, wordlength);
+            }
+
+            //  ;WDCNT;
+
+
+
+
+
+
+
+            console.log('callNext');
+
+
+
+
+
+
+        }
+
+
+
+
+        function savedata() {
+            localStorage.setItem('levelnum', levelnum);
+            localStorage.setItem('levelstate', levelstate);
+            localStorage.setItem('wordlength', wordlength);
+            localStorage.setItem('allowskiplevel', allowskiplevel);
+            localStorage.setItem('totaleng', totaleng);
+            localStorage.setItem('totalchs', totalchs);
+
+
+
+            localStorage.setItem('0', keyhitnum['0']);
+            localStorage.setItem('1', keyhitnum['1']);
+            localStorage.setItem('2', keyhitnum['2']);
+            localStorage.setItem('3', keyhitnum['3']);
+            localStorage.setItem('4', keyhitnum['4']);
+            localStorage.setItem('5', keyhitnum['5']);
+            localStorage.setItem('6', keyhitnum['6']);
+            localStorage.setItem('7', keyhitnum['7']);
+            localStorage.setItem('8', keyhitnum['8']);
+            localStorage.setItem('9', keyhitnum['9']);
+            localStorage.setItem('a', keyhitnum['a']);
+            localStorage.setItem('b', keyhitnum['b']);
+            localStorage.setItem('c', keyhitnum['c']);
+            localStorage.setItem('d', keyhitnum['d']);
+            localStorage.setItem('e', keyhitnum['e']);
+            localStorage.setItem('f', keyhitnum['f']);
+            localStorage.setItem('g', keyhitnum['g']);
+            localStorage.setItem('h', keyhitnum['h']);
+            localStorage.setItem('i', keyhitnum['i']);
+            localStorage.setItem('j', keyhitnum['j']);
+            localStorage.setItem('k', keyhitnum['k']);
+            localStorage.setItem('l', keyhitnum['l']);
+            localStorage.setItem('m', keyhitnum['m']);
+            localStorage.setItem('n', keyhitnum['n']);
+            localStorage.setItem('o', keyhitnum['o']);
+            localStorage.setItem('p', keyhitnum['p']);
+            localStorage.setItem('q', keyhitnum['q']);
+            localStorage.setItem('r', keyhitnum['r']);
+            localStorage.setItem('s', keyhitnum['s']);
+            localStorage.setItem('t', keyhitnum['t']);
+            localStorage.setItem('u', keyhitnum['u']);
+            localStorage.setItem('v', keyhitnum['v']);
+            localStorage.setItem('w', keyhitnum['w']);
+            localStorage.setItem('x', keyhitnum['x']);
+            localStorage.setItem('y', keyhitnum['y']);
+            localStorage.setItem('z', keyhitnum['z']);
+            localStorage.setItem(';', keyhitnum[';']);
+            localStorage.setItem(',', keyhitnum[',']);
+            localStorage.setItem('.', keyhitnum['.']);
+            localStorage.setItem('/', keyhitnum['/']);
+
+
+
+
+
+            localStorage.setItem('0e', keyerrnum['0']);
+            localStorage.setItem('1e', keyerrnum['1']);
+            localStorage.setItem('2e', keyerrnum['2']);
+            localStorage.setItem('3e', keyerrnum['3']);
+            localStorage.setItem('4e', keyerrnum['4']);
+            localStorage.setItem('5e', keyerrnum['5']);
+            localStorage.setItem('6e', keyerrnum['6']);
+            localStorage.setItem('7e', keyerrnum['7']);
+            localStorage.setItem('8e', keyerrnum['8']);
+            localStorage.setItem('9e', keyerrnum['9']);
+            localStorage.setItem('ae', keyerrnum['a']);
+            localStorage.setItem('be', keyerrnum['b']);
+            localStorage.setItem('ce', keyerrnum['c']);
+            localStorage.setItem('de', keyerrnum['d']);
+            localStorage.setItem('ee', keyerrnum['e']);
+            localStorage.setItem('fe', keyerrnum['f']);
+            localStorage.setItem('ge', keyerrnum['g']);
+            localStorage.setItem('he', keyerrnum['h']);
+            localStorage.setItem('ie', keyerrnum['i']);
+            localStorage.setItem('je', keyerrnum['j']);
+            localStorage.setItem('ke', keyerrnum['k']);
+            localStorage.setItem('le', keyerrnum['l']);
+            localStorage.setItem('me', keyerrnum['m']);
+            localStorage.setItem('ne', keyerrnum['n']);
+            localStorage.setItem('oe', keyerrnum['o']);
+            localStorage.setItem('pe', keyerrnum['p']);
+            localStorage.setItem('qe', keyerrnum['q']);
+            localStorage.setItem('re', keyerrnum['r']);
+            localStorage.setItem('se', keyerrnum['s']);
+            localStorage.setItem('te', keyerrnum['t']);
+            localStorage.setItem('ue', keyerrnum['u']);
+            localStorage.setItem('ve', keyerrnum['v']);
+            localStorage.setItem('we', keyerrnum['w']);
+            localStorage.setItem('xe', keyerrnum['x']);
+            localStorage.setItem('ye', keyerrnum['y']);
+            localStorage.setItem('ze', keyerrnum['z']);
+            localStorage.setItem(';e', keyerrnum[';']);
+            localStorage.setItem(',e', keyerrnum[',']);
+            localStorage.setItem('.e', keyerrnum['.']);
+            localStorage.setItem('/e', keyerrnum['/']);
+
+            for (var i in wordnum) {
+
+                localStorage.setItem('total' + i, wordnum[i]);
+
+            }
+
+            for (var i in worderr) {
+
+                localStorage.setItem('error' + i, worderr[i]);
+
+            }
+
+
+            for (var i in wordspd) {
+
+                localStorage.getItem('spd' + i, wordspd[i]);
+
+            }
+
+        }
+
+        callDisplay();
+        function callDisplay() {
+
+            var s = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/'];
+
+            var sum;
+            var hitavg;
+            var erravg;
+            var hitmax = 0;
+            var errmax = 0;
+            sum = 0;
+            for (var i = 0; i < s.length; i++) {
+                sum += keyhitnum[s[i].toLowerCase()];
+                if (keyhitnum[s[i].toLowerCase()] > hitmax)
+                    hitmax = keyhitnum[s[i].toLowerCase()];
+
+            }
+            hitavg = sum / s.length;
+            sum = 0;
+            for (var i = 0; i < s.length; i++) {
+                sum += keyerrnum[s[i].toLowerCase()];
+                if (keyhitnum[s[i].toLowerCase()] > errmax)
+                    errmax = keyhitnum[s[i].toLowerCase()];
+
+            }
+            erravg = sum / s.length;
+            //console.log(errmax);
+           // console.log(erravg);
+//console.log(hitmax);
+//console.log(hitavg);
+
+
+            for (var i = 0; i < s.length; i++) {
+                anjianhit[i].innerText = s[i];
+                anjiancrt[i].innerText = s[i];
+                var hit = keyhitnum[s[i].toLowerCase()];
+                var err = keyerrnum[s[i].toLowerCase()];
+                if (hit > hitavg) {
+                    anjianhit[i].style.background = "rgba("+Math.floor((hit) / hitmax * 255)+", 0, 0,.3)";
+                    //console.log(MATH.floor((hit) / hitmax * 255));
+                }
+                else {
+                    var tmp=Math.floor((hitavg - hit) / hitavg * 255);
+                    anjianhit[i].style.background = "rgba(0,"+tmp+", 0)" ;
+                }
+
+
+                if (err > erravg) {
+                    anjiancrt[i].style.background =" rgba("+Math.floor(( err) / errmax * 255)+", 0, 0,.3)";
+                }
+                else {
+
+                    anjiancrt[i].style.background ="rgba(0, "+Math.floor((erravg - err) / erravg * 255)+", 0,.3)" ;
+                }
+
+            }
+
+        }
+
+
+
+
+
+        function updatelevel(levelnum) {
+
+            for (var i = 0; i < menue_list.length; i++) {
+                menue_list[i].className = "unselectedL";
+                // console.log(i); 
+                //  this.className = "selectedL";
+            }
+            menue_list[parseInt(levelnum)].className = "selectedL";
+        }
+        const setCaretPosition = function (element, pos) {
+            var range, selection;
+            if (document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+            {
+                range = document.createRange();//创建一个选中区域
+                range.selectNodeContents(element);//选中节点的内容
+                if (element.innerHTML.length > 0) {
+                    range.setStart(element.childNodes[0], pos); //设置光标起始为指定位置
+                }
+                range.collapse(true);       //设置选中区域为一个点
+                selection = window.getSelection();//获取当前选中区域
+                selection.removeAllRanges();//移出所有的选中范围
+                selection.addRange(range);//添加新建的范围
+            }
+            else if (document.selection)//IE 8 and lower
+            {
+                range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+                range.moveToElementText(element);//Select the entire contents of the element with the range
+                range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+                range.select();//Select the range (make it the visible selection
+            }
+        }
+
+
+
+
+
+        //var cursor = 0; // 光标位置  
+        //document.onselectionchange = function () {
+        //            var range = document.selection.createRange();
+        //            var srcele = range.parentElement();//获取到当前元素
+        //         var copy = document.body.createTextRange();
+        //            copy.moveToElementText(srcele);
+        //
+        //            for (cursor = 0; copy.compareEndPoints("StartToStart", range) < 0; cursor++) {
+        //                copy.moveStart("character", 1);//改变光标位置，实际上我们是在记录cursor的数量.
+        //            }
+        //        }  
+        //
+        //function moveEnd(obj) {
+        //      s=document.querySelector('.s');//#ipp
+        //      
+        //      s.focus();
+        //      var r = document.selection.createRange();
+        //       //因为这里是从当前光标开始移动的(好像文本框的是从0算起.)所以我们需要拿到当前光标位置，然后就可以计算出要移动多少位了，这样就可以把光标移动到想要的位置了
+        //    r.moveStart('character', s.innerText.length - cursor);
+        //     r.collapse(true);
+        //     r.select();
+        //}
+
+
+        DocumentObserverConfig = {
+            attributes: false,
+            childList: false,
+            characterData: true,
+            subtree: true
+        };
+
+
+        DocumentObserver.observe(mainArea, DocumentObserverConfig);
+
+
+
+
+        function refreshObserver() {
+            DocumentObserver.disconnect();
+            DocumentObserver.observe(mainArea, DocumentObserverConfig);
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>
