@@ -111,16 +111,16 @@
         .txtdsp {
             height: 200px;
             width: 100%;
-            z-index: 30;
+            z-index: 0;
 
         }
 
         .txtdsp,
         .inputText {
-            background-color: rgba(235, 29, 29, 0.0);
+            
 
             font-size: 30px;
-            color: black;
+            
             font-weight: 900;
         }
 
@@ -184,7 +184,7 @@
             border-collapse: separate;
             outline: none;
             overflow: hidden;
-            color: rgb(255, 255, 255, 0.3);
+            color: rgb(0, 0, 0, 0);
         }
 
         .inputText1 {
@@ -193,7 +193,7 @@
             top: 60px;
             left: 50%;
             margin-left: -440px;
-            z-index: 0;
+            z-index: 50;
             height: 200px;
             width: 760px;
             border: none;
@@ -201,10 +201,10 @@
             outline: none;
             overflow: hidden;
 
-            background-color: rgba(255, 255, 255, 0.0);
+            
 
             font-size: 30px;
-            color: rgba(255, 255, 255, 0.0);
+            
             font-weight: 900;
         }
 
@@ -849,7 +849,7 @@
 
 
 
-        function setLevel(levelnum) {
+        function setLevel(levelnum1) {
             //s.innerText="-——————————”+’levelnum‘；
             //t = frame_list[levelnum].querySelector('.txtdsp');
             t = frame_list[0].querySelector('.txtdsp');
@@ -868,7 +868,16 @@
             avgspd = 0;
             STARTFLAG = false;
             WDCNT = 0;
-            t.innerHTML = getStr(levelnum, levelstate, wordlength);
+            if(parseInt(levelnum1)!=5){
+            t.innerHTML = getStr(levelnum1, levelstate, wordlength);
+          var s111 = document.querySelector('.inputText1');
+            	s111.innerHTML ='';
+          }
+            else{
+            	var s111 = document.querySelector('.inputText1');
+            	s111.innerHTML = getStr(levelnum1, levelstate, wordlength);
+            	t.innerText=s111.innerText;
+            }
             //console.log(levelnum);
             totalengwg =0;
             accuraty=0;
@@ -1800,9 +1809,9 @@
                 //var i=CIkey.length;
                 for (var i = 0; i < num; i++) {
                     if (i % 2)
-                        str += "<span style='background-color:blue'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
+                        str += "<span style='background-color:RGB(0,0,255,0.3) ;text-decoration-color:blue;text-decoration:underline'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
                     else
-                        str += "<span style='background-color:red'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
+                        str += "<span style='background-color:RGB(0,0,0,0.0)'>" + CIkey[getRnd(0, CIkey.length - 1)] + "</span>";
                 }
                 return str;
             }
@@ -1823,6 +1832,7 @@
             STARTTIME = +new Date;
             //dispdebug.innerText = STARTTIME;
             STARTFLAG = true;
+            
 
         }
         s.onblur = function () {
@@ -1833,9 +1843,11 @@
             TIMESN = tg - STARTTIME + TIMESN;
           //  dispdebug.innerText = TIMESN;
             //alert(":");
-            savedata();
+          //  savedata();
         }
-
+dispdebug.onclick=function(){
+	savedata();
+	}
 
         //  s.innerHTML="<span style='background-color:pink'>876</span>";
         // rr.innerHTML="<span style='background-color:blue'>876</span>";
@@ -2010,7 +2022,7 @@ function updateclr()
                 doing = false;
                 //       rr.value=doing+"…………";
                 // doSomething();
-                console.log(levelstate);
+              //  console.log(levelstate);
               //  dispdebug.innerText = "no";
                 var stxt = s.innerText;//输入
                 var ttxt = t.innerText;//目标文本
@@ -2045,6 +2057,7 @@ function updateclr()
                         	    totalengwg ++;
                             if (wordcode[strcrt[i]] != "" && wordcode[strcrt[i]] != undefined) {
                                 worderr[strcrt[i]] += 1;
+                                word2key(strcrt[i],false);
                                 strtest += "错字计数" + strcrt[i] + "!:" + worderr[strcrt[i]];
                             }
                         }
@@ -2052,6 +2065,7 @@ function updateclr()
                             if (wordcode[strcrt[i]] != "" && wordcode[strcrt[i]] != undefined) {
                                 wordspd[strcrt[i]] = wordspd[strcrt[i]] * 0.99 + (SINGLEWORDTIME / strcrt.length) * .01;
                                 strtest += "单字速度" + strcrt[i] + ":" + wordspd[strcrt[i]] + "mspw";
+                                word2key(strcrt[i],true);
                             }
                         }
                     }
@@ -2090,6 +2104,60 @@ function updateclr()
             }
         }, false);
 
+function word2key(hanzi,rightflag){
+	var tmpchar='';
+	if(rightflag){
+		
+			if (hanzi in WORDCODE) {
+			
+			tmpchar=WORDCODE[hanzi];
+			for(var i=0;i<tmpchar.length;i++){
+			//console.log(keyhitnum[tmpchar[i]]);
+			 keyhitnum[tmpchar[i]] += 1;
+			// console.log(keyhitnum[tmpchar[i]]);
+			 
+			}
+			return;
+			
+		}
+		else{
+			return;
+			
+		}
+		
+	}
+	
+	else{
+		
+		if (hanzi in WORDCODE) {
+			
+			tmpchar=WORDCODE[hanzi];
+			for(var i=0;i<tmpchar.length;i++){
+			//console.log(keyerrnum[tmpchar[i]]);
+			 keyerrnum[tmpchar[i]] += 1;
+			//console.log(keyerrnum[tmpchar[i]]);
+			 
+			}
+			return;
+			
+		}
+		else{
+			return;
+			
+		}
+	}
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
         function checkColor() {
 
             var input_txt = s.innerText;
@@ -2097,12 +2165,12 @@ function updateclr()
             var formatted = '';
             var currentR = false;
             if (input_txt[0] == right_txt[0]) {
-                formatted = "<span style='background-color:gray'>";
+                formatted = "<span style='background-color:green;text-decoration:underline;text-decoration-color:yellow'>";
                 currentR = true;
             }
             else {
 
-                formatted = "<span style='background-color:red'>";
+                formatted = "<span style='background-color:red; text-decoration:line-through ;text-decoration-color:white'>";
                 currentR = false;
             }
 
@@ -2119,12 +2187,12 @@ function updateclr()
                     if (currentR) {
 
                         currentR = !currentR;
-                        formatted = formatted + "</span><span style='background-color:red'>" + right_txt[i];
+                        formatted = formatted + "</span><span style='background-color:red ;text-decoration:line-through ;text-decoration-color:white'>" + right_txt[i];
 
                     } else {
 
                         currentR = !currentR;
-                        formatted = formatted + "</span><span style='background-color:gray'>" + right_txt[i];
+                        formatted = formatted + "</span><span style='background-color:green;text-decoration:underline;text-decoration-color:yellow'>" + right_txt[i];
                     }
 
 
@@ -2287,9 +2355,16 @@ function updateclr()
 
 
             if (parseInt(levelnum) == 5) {
-                // t.innerHTML = getStr(levelnum, levelstate, wordlength);
-                var s111 = document.querySelector('.inputText1');
-                // s111.innerHTML = getStr(levelnum, levelstate, wordlength);
+              //   t.innerTEXT = getStr(levelnum, levelstate, wordlength);
+                 s111 = document.querySelector('.inputText1');
+                 s111.innerHTML = getStr(levelnum, levelstate, wordlength);
+                
+                 
+                 var str=s111.innerText;
+               //  alert(str);
+                
+                 t.innerText=str;
+               //   alert(t.innerText);
             }
 
             //  ;WDCNT;
@@ -2300,7 +2375,7 @@ function updateclr()
 
 
 
-            console.log('callNext');
+            //console.log('callNext');
 
 
 
@@ -2436,9 +2511,12 @@ function updateclr()
         }
 
    // minimal heatmap instance configuration
-var heatmapInstance = h337.create({ 
+var hitInstance = h337.create({ 
 // only container is required, the rest will be defaults 
-container: divexp }); 
+container: divhit }); 
+var errInstance = h337.create({ 
+// only container is required, the rest will be defaults 
+container: divcrt  }); 
 // now generate some random data 
 
 
@@ -2501,8 +2579,10 @@ container: divexp });
             }
 
 
-						var points = []; 
-						var max = ( hitmax>errmax?hitmax:errmax);
+						var points1 = []; 
+						var points2 = []; 
+						var max1 = hitmax;
+						var max2 = errmax;
 						
            
 					//	var width = 840;
@@ -2519,7 +2599,7 @@ container: divexp });
 						var y1=23+46*(row);
 						
 						var x2=38+76*(col+0);
-						var y2=23+46*(row+4);
+						var y2=23+46*(row);
 						
 						var point1 = { x: x1,
 						 y: y1, 
@@ -2528,22 +2608,25 @@ container: divexp });
 						 y: y2, 
 						value: parseInt(keyerrnum[(s[row*10+col]).toLowerCase()])}; 
 						
-						points.push(point1);
-						points.push(point2);
+						points1.push(point1);
+						points2.push(point2);
 //						console.log(point1['x']);
 //						console.log(point1['y']);
 						//console.log((s[row*10+col]));
-						console.log(''+x1+":"+y1+";"+(s[row*10+col])+":"+parseInt(keyhitnum[(s[row*10+col]).toLowerCase()]));
+				//		console.log(''+x1+":"+y1+";"+(s[row*10+col])+":"+parseInt(keyhitnum[(s[row*10+col]).toLowerCase()]));
 					//	console.log(s[row*10+col]);
 				//		console.log(parseInt(keyerrnum[(s[row*10+col]).toLowerCase()]));
-						console.log(''+x2+":"+y2+";"+(s[row*10+col])+":"+parseInt(keyerrnum[(s[row*10+col]).toLowerCase()]));
+						//console.log(''+x2+":"+y2+";"+(s[row*10+col])+":"+parseInt(keyerrnum[(s[row*10+col]).toLowerCase()]));
 						 }
 						}
 						
 					
 						
 						 // heatmap data format
-						 datalegent = { max: max, data: points }; 
+						 datalegent1 = { max: max1, data: points1 }; 
+						 datalegent2 = { max: max2, data: points2 }; 
+						hitInstance.setData(datalegent1);
+						 errInstance.setData(datalegent2);
 
 
 
@@ -2558,7 +2641,9 @@ container: divexp });
 
 // if you have a set of datapoints always use setData instead of addData 
 // for data initialization 
-heatmapInstance.setData(datalegent);
+//heatmapInstance.setData(datalegent);
+hitInstance.setData(datalegent1);
+						 errInstance.setData(datalegent2);
 
 
 
