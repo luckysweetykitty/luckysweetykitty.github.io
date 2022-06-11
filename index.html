@@ -125,9 +125,10 @@
         }
 
         .exp {
-            background-color: rgba(202, 202, 36, 0.5);
+            //background-color: rgba(202, 202, 36, 0.5);
             height: 380px;
             width: 100%;
+            z-index:0;
         }
 
         .show {
@@ -144,6 +145,7 @@
             height: 50%;
             width: 100%;
             background-color: rbga(0, 0, 255, 0.5);
+            z-index:20;
 
         }
 
@@ -151,6 +153,7 @@
             height: 50%;
             width: 100%;
             background-color: rbga(255, 0, 0, 0.5);
+             z-index:20;
         }
 
         .anjian {
@@ -161,6 +164,7 @@
             
             line-height: 40px;
             text-align: center;
+            font-weight:700;
             font-size: 30px;
             color: blueviolet;
             /* 760x380 */
@@ -212,10 +216,8 @@
             white-space: normal;
         }
     </style>
-    <script src="jquery-3.6.0.js">
-
-    </script>
-
+    <script src="jquery-3.6.0.js"></script>
+<script src="heatmap.js"></script>
 </head>
 
 <body>
@@ -571,6 +573,7 @@
 
     <script>
         dispdebug = document.querySelector('.stat');
+     
         var contents_l = document.querySelector('.contents');
         var nav_l = contents_l.querySelector(".nav");
         var nav_tab_l = nav_l.querySelector("ul");
@@ -1814,7 +1817,7 @@
             // tmp="0";
             return tmp;
         }
-
+//					STARTTIME=0;
 
         s.onclick = function () {
             STARTTIME = +new Date;
@@ -2310,6 +2313,10 @@ function updateclr()
 
 
         function savedata() {
+        	
+        	
+        	 dispdebug.style.background =  " rgba(255, 0, 0, .5)";
+        	 alert("saving data");
             localStorage.setItem('levelnum', levelnum);
             localStorage.setItem('levelstate', levelstate);
             localStorage.setItem('wordlength', wordlength);
@@ -2423,8 +2430,18 @@ function updateclr()
                 localStorage.getItem('spd' + i, wordspd[i]);
 
             }
-
+					dispdebug.style.background =  " rgba(0, 128, 0, .5)";
+					alert("saving completed");
+					return true;
         }
+
+   // minimal heatmap instance configuration
+var heatmapInstance = h337.create({ 
+// only container is required, the rest will be defaults 
+container: divexp }); 
+// now generate some random data 
+
+
 
         callDisplay();
         function callDisplay() {
@@ -2447,8 +2464,8 @@ function updateclr()
             sum = 0;
             for (var i = 0; i < s.length; i++) {
                 sum += keyerrnum[s[i].toLowerCase()];
-                if (keyhitnum[s[i].toLowerCase()] > errmax)
-                    errmax = keyhitnum[s[i].toLowerCase()];
+                if (keyerrnum[s[i].toLowerCase()] > errmax)
+                    errmax = keyerrnum[s[i].toLowerCase()];
 
             }
             erravg = sum / s.length;
@@ -2464,26 +2481,95 @@ function updateclr()
                 var hit = keyhitnum[s[i].toLowerCase()];
                 var err = keyerrnum[s[i].toLowerCase()];
                 if (hit > hitavg) {
-                    anjianhit[i].style.background = "rgba("+Math.floor((hit) / hitmax * 255)+", 0, 0,.3)";
+                   // anjianhit[i].style.background = "rgba("+Math.floor((hit) / hitmax * 255)+", 0, 0,.3)";
                     //console.log(MATH.floor((hit) / hitmax * 255));
                 }
                 else {
                     var tmp=Math.floor((hitavg - hit) / hitavg * 255);
-                    anjianhit[i].style.background = "rgba(0,"+tmp+", 0)" ;
+                   // anjianhit[i].style.background = "rgba(0,"+tmp+", 0)" ;
                 }
 
 
                 if (err > erravg) {
-                    anjiancrt[i].style.background =" rgba("+Math.floor(( err) / errmax * 255)+", 0, 0,.3)";
+                    //anjiancrt[i].style.background =" rgba("+Math.floor(( err) / errmax * 255)+", 0, 0,.3)";
                 }
                 else {
 
-                    anjiancrt[i].style.background ="rgba(0, "+Math.floor((erravg - err) / erravg * 255)+", 0,.3)" ;
+                    //anjiancrt[i].style.background ="rgba(0, "+Math.floor((erravg - err) / erravg * 255)+", 0,.3)" ;
                 }
 
             }
 
+
+						var points = []; 
+						var max = ( hitmax>errmax?hitmax:errmax);
+						
+           
+					//	var width = 840;
+					//	 var height = 400; 
+					//	var len = 20; 
+						for(var row=0;row<4;row++ ){ 
+							
+							//76X46
+							
+							for(var col=0;col<10;col++)
+							{
+							
+						var x1=38+76*(col);
+						var y1=23+46*(row);
+						
+						var x2=38+76*(col+0);
+						var y2=23+46*(row+4);
+						
+						var point1 = { x: x1,
+						 y: y1, 
+						value:parseInt(keyhitnum[(s[row*10+col]).toLowerCase()])}; 
+						var point2 = { x:x2,
+						 y: y2, 
+						value: parseInt(keyerrnum[(s[row*10+col]).toLowerCase()])}; 
+						
+						points.push(point1);
+						points.push(point2);
+//						console.log(point1['x']);
+//						console.log(point1['y']);
+						//console.log((s[row*10+col]));
+						console.log(''+x1+":"+y1+";"+(s[row*10+col])+":"+parseInt(keyhitnum[(s[row*10+col]).toLowerCase()]));
+					//	console.log(s[row*10+col]);
+				//		console.log(parseInt(keyerrnum[(s[row*10+col]).toLowerCase()]));
+						console.log(''+x2+":"+y2+";"+(s[row*10+col])+":"+parseInt(keyerrnum[(s[row*10+col]).toLowerCase()]));
+						 }
+						}
+						
+					
+						
+						 // heatmap data format
+						 datalegent = { max: max, data: points }; 
+
+
+
+
+
+
         }
+
+
+
+
+
+// if you have a set of datapoints always use setData instead of addData 
+// for data initialization 
+heatmapInstance.setData(datalegent);
+
+
+
+
+
+
+
+
+
+
+
 
 
 
