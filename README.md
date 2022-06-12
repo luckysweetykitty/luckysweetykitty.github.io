@@ -51,5 +51,13 @@
 
 
 
+#### udf
+
+__udf=true;
+//udf
+//function udf(levelnum)
+//levelnum:关卡号
+//全局变量：推荐__udf_[a-z]*[A-Z][a-z]*  ,    如__udf_wordLength
+
 
 
